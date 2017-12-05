@@ -1,0 +1,52 @@
+id: highwater_sample
+label: Highwater migration example
+migration_group: default
+source:
+  plugin: url
+  urls: "http://local.drupal8.com/migration_files/pages_content_basic.json"
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 2
+#  high_water_property:
+#    name: page_title
+
+  # This is the property that we are trying to use.
+  track_changes: true
+
+  fields:
+    -
+      name: page_title
+      label: 'Page Title'
+      selector: title
+    -
+      name: id
+      label: 'Unique Id'
+      selector: id
+    -
+      name: page_body
+      label: 'Page Body'
+      selector: body
+    -
+      name: date_created
+      label: 'Date created'
+      selector: date_created
+
+  ids:
+    id:
+      type: string
+
+
+process:
+  title: page_title
+  'body/value': page_body
+  'body/format':
+    plugin: default_value
+    default_value: basic_html
+  type:
+    plugin: default_value
+    default_value: page
+
+
+destination:
+  plugin: entity:node
+migration_dependencies: {}

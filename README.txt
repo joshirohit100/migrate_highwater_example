@@ -1,0 +1,1 @@
+#Move the migration_files directory inside the root of your drupal installation.

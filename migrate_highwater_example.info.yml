@@ -1,0 +1,8 @@
+name: 'Migrate highwater example'
+type: module
+description: 'Example of migrate high water and track change property.'
+package: Migration
+core: 8.x
+version: 8.x-1.x
+dependencies:
+  - migrate_plus
