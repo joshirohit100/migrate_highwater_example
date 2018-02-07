@@ -1,0 +1,43 @@
+id: nested_xml_sample
+label: Nested xml migration example
+migration_group: default
+source:
+  plugin: url
+  urls: "http://local.drupal8.com/migration_files/nested_structure.xml"
+  data_fetcher_plugin: http
+  data_parser_plugin: nested_xml_data
+  item_selector: /pages/page
+
+  fields:
+    -
+      name: page_title
+      label: 'Page Title'
+      selector: title
+    -
+      name: id
+      label: 'Unique Id'
+      selector: id
+    -
+      name: page_body
+      label: 'Page Body'
+      selector: body
+
+  ids:
+    id:
+      type: integer
+
+
+process:
+  title: page_title
+  'body/value': page_body
+  'body/format':
+    plugin: default_value
+    default_value: basic_html
+  type:
+    plugin: default_value
+    default_value: page
+
+
+destination:
+  plugin: entity:node
+migration_dependencies: {}

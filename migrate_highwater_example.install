@@ -6,4 +6,5 @@
 function migrate_highwater_example_uninstall() {
   // Delete config on module uninstall.
   \Drupal::configFactory()->getEditable('migrate_plus.migration.highwater_sample')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.nested_xml_sample')->delete();
 }
